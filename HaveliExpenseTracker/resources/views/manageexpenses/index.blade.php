@@ -12,14 +12,22 @@
     <!-- bootstrap-wysiwyg -->
     <link href="{{ asset('gentelella/vendors/google-code-prettify/bin/prettify.min.css') }}" rel="stylesheet">
     <!-- Select2 -->
-    <<link href="{{ asset('gentelella/vendors/select2/dist/css/select2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('gentelella/vendors/select2/dist/css/select2.min.css') }}" rel="stylesheet">
     <!-- Switchery -->
     <link href="{{ asset('gentelella/vendors/switchery/dist/switchery.min.css') }}" rel="stylesheet">
     <!-- starrr -->
     <link href="{{ asset('gentelella/vendors/starrr/dist/starrr.css') }}" rel="stylesheet">
     <!-- bootstrap-daterangepicker -->
     <link href="{{ asset('gentelella/vendors/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet">
+    <!--advanced form-->
+    <!-- bootstrap-datetimepicker -->
+    <link href="{{ asset('gentelella/vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css') }}" rel="stylesheet">
     <!--Forms Close-->
+<style type="text/css">
+  .nk-icon-button{
+    cursor: pointer;
+  }
+</style>
 @endsection
 
 @section('content')
@@ -47,6 +55,7 @@
 
             <div class="clearfix"></div>
 
+            @if(count($expenses) > 0)
             <div class="row">
 
               <div class="col-md-12 col-sm-12 col-xs-12">
@@ -79,63 +88,42 @@
                           <th>Date</th>
                           <th>Purpose</th>
                           <th>Amount</th>
+                          <th>Actions</th>
                         </tr>
                       </thead>
                       <tbody>
+                        @foreach($expenses as $expense)
                         <tr>
-                          <td>6</td>
-                          <td>Nomendra</td>
+                          <td>{{ $expense['id'] }}</td>
+                          <td>{{ $expense['user_id'] }}</td>
                           <td>13/02/2018</td>
                           <td>Airtel WiFi</td>
                           <td>600</td>
+                          <td>
+                            <span onclick="nkedit(6);" class="fa-stack nk-icon-button" style="margin-right: 15px;">
+                              <i class="fa fa-square fa-stack-2x" style="color: #ea900e;"></i>
+                              <i class="fa fa-edit fa-stack-1x" style="color: white;"></i>
+                            </span>
+                            <span onclick="nkdelete(6);" class="fa-stack nk-icon-button" style="margin-right: 15px;">
+                              <i class="fa fa-square fa-stack-2x" style="color: red;"></i>
+                              <i class="fa fa-trash fa-stack-1x" style="color: white;"></i>
+                            </span>
+                          </td>
                         </tr>
-                        <tr>
-                          <td>5</td>
-                          <td>Ashish</td>
-                          <td>10/02/2018</td>
-                          <td>Vegetables</td>
-                          <td>500</td>
-                        </tr>
-                        <tr>
-                          <td>4</td>
-                          <td>Vishal</td>
-                          <td>08/02/2018</td>
-                          <td>grocery</td>
-                          <td>800</td>
-                        </tr>
-                        <tr>
-                          <td>3</td>
-                          <td>Manish</td>
-                          <td>07/02/2018</td>
-                          <td>Vegetables</td>
-                          <td>400</td>
-                        </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>Ashish</td>
-                          <td>06/02/2018</td>
-                          <td>Chicken</td>
-                          <td>200</td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>Vishal</td>
-                          <td>04/02/2018</td>
-                          <td>Lights</td>
-                          <td>900</td>
-                        </tr>
+                        @endforeach
                       </tbody>
                     </table>
                   </div>
                 </div>
               </div>
             </div>
+            @endif
 
-                        <div class="row">
+            <div class="row">
               <div class="col-md-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Add Expenses</h2>
+                    <h2>Add/Edit Expense</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -155,28 +143,40 @@
                   </div>
                   <div class="x_content">
                     <br />
-                    <form class="form-label-left input_mask">
+                    <form class="form-label-left input_mask" method="POST" action="{{ route('addexpensesubmit') }}">
+
+                      {{ csrf_field() }}
+
+                      <input type="hidden" name="user_id" value="{{ $currentUser->id }}">
 
                       <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 form-group has-feedback">
-                        <input type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="Name" readonly="readonly">
+                        <input type="text" name="index" class="form-control has-feedback-left" id="inputSuccess1" placeholder="Index" readonly="readonly" value="Index">
                         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                       </div>
                       <div class="clearfix"></div>
 
                       <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 form-group has-feedback">
-                        <input type="text" class="date-picker form-control has-feedback-left" id="inputSuccess3" placeholder="Date">
-                        <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
+                        <input type="text" name="name" class="form-control has-feedback-left" id="inputSuccess2" placeholder="Name" readonly="readonly" required="" value="{{ $currentUser->name }}">
+                        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                       </div>
                       <div class="clearfix"></div>
 
+                      <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 xdisplay_inputx form-group has-feedback">
+                                <input type="text" name="date" class="form-control has-feedback-left" id="single_cal_nk" placeholder="Date" aria-describedby="inputSuccess2Status" required="">
+                                <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                                <span id="inputSuccess2Status" class="sr-only">(success)</span>
+                      </div>
+                      
+                      <div class="clearfix"></div>
+
                       <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 form-group has-feedback">
-                        <input type="text" class="form-control has-feedback-left" id="inputSuccess4" placeholder="Amount">
+                        <input type="text" name="amount" class="form-control has-feedback-left" id="inputSuccess4" placeholder="Amount" pattern="[1-9]{1}[0-9]{1,4}" required="">
                         <span class="fa fa-rupee form-control-feedback left" aria-hidden="true"></span>
                       </div>
                       <div class="clearfix"></div>
 
                       <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 form-group has-feedback">
-                        <input type="text" class="form-control has-feedback-left" id="inputSuccess5" placeholder="Purpose">
+                        <input type="text" name="purpose" class="form-control has-feedback-left" id="inputSuccess5" placeholder="Purpose" required="">
                         <span class="fa fa-comment form-control-feedback left" aria-hidden="true"></span>
                       </div>
                       <div class="clearfix"></div>
@@ -184,8 +184,8 @@
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
-                          <button type="button" class="btn btn-primary">Cancel</button>
-						   <button class="btn btn-primary" type="reset">Reset</button>
+                          <!--<button type="button" class="btn btn-primary">Cancel</button>-->
+						              <button class="btn btn-primary" type="reset">Reset</button>
                           <button type="submit" class="btn btn-success">Submit</button>
                         </div>
                       </div>
@@ -240,5 +240,32 @@
     <script src="{{ asset('gentelella/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js') }}"></script>
     <!-- starrr -->
     <script src="{{ asset('gentelella/vendors/starrr/dist/starrr.js') }}"></script>
+    <!--advanced form-->
+    <!-- bootstrap-datetimepicker -->    
+    <script src="{{ asset('gentelella/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js') }}"></script>
  <!--form close-->
+ <!-- jquery.inputmask -->
+    <script src="{{ asset('gentelella/vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js') }}"></script>
+<script type="text/javascript">
+	$('#myDatepicker').datetimepicker({
+        format: 'DD/MM/YYYY',
+        maxDate: new Date()
+    });
+    $('#single_cal_nk').daterangepicker({
+    	      locale: {
+		        format: 'DD/MM/YYYY'
+		      },
+        	  maxDate: new Date(),
+			  singleDatePicker: true,
+			  singleClasses: "picker_1"
+			}, function(start, end, label) {
+			  console.log(start.toISOString(), end.toISOString(), label);
+	});
+  function nkedit(index){
+    alert(index+' edit');
+  }
+  function nkdelete(index){
+    alert(index+' delete');
+  }
+</script>
 @endsection

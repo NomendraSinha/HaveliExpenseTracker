@@ -35,9 +35,15 @@
     @yield('header-style')
     @yield('header-script')
 
+    <style type="text/css">
+        .site_title{
+            font-size: 15px;
+        }
+    </style>
+
   </head>
 
-  <body class="nav-md footer_fixed">
+  <body class="nav-md">
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col menu_fixed">
@@ -55,7 +61,7 @@
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <h2>{{ $currentUser->name }}</h2>
               </div>
             </div>
             <!-- /menu profile quick info -->

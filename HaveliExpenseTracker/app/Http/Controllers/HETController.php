@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Expense;
 
 class HETController extends Controller
 {
@@ -13,7 +14,8 @@ class HETController extends Controller
      */
     public function index()
     {
-        return view('manageexpense.index');
+        $expenses = Expense::all();
+        return view('manageexpenses.index')->with('expenses',$expenses);
     }
 
     /**
@@ -34,7 +36,7 @@ class HETController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $request;
     }
 
     /**

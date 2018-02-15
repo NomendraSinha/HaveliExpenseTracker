@@ -21,4 +21,7 @@ Auth::routes();
 //Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('myhome');
 
-Route::get('/manage-expense','HETController@index')->name('manageexpense');
+Route::middleware(['auth'])->group(function () {
+	Route::get('/manage-expenses','HETController@index')->name('manageexpenses');
+	Route::post('/manage-expenses','HETController@store')->name('addexpensesubmit');
+});

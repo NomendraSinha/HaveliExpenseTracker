@@ -5,7 +5,7 @@
                   <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ route('myhome') }}">Dashboard</a></li>
-                      <li><a href="{{ route('manageexpense') }}">Manage Expense</a></li>
+                      <li><a href="{{ route('manageexpenses') }}">Manage Expenses</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -14,6 +14,7 @@
             <!-- /sidebar menu -->
 
             <!-- /menu footer buttons -->
+            <!--
             <div class="sidebar-footer hidden-small">
               <a data-toggle="tooltip" data-placement="top" title="Settings">
                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
@@ -28,6 +29,7 @@
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>
+            -->
             <!-- /menu footer buttons -->
           </div>
         </div>
@@ -43,10 +45,11 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="{{ asset('gentelella/basics/images/img.jpg') }}" alt="">John Doe
+                    <img src="{{ asset('gentelella/basics/images/img.jpg') }}" alt="">{{ $currentUser->name }}
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <!--
                     <li><a href="javascript:;"> Profile</a></li>
                     <li>
                       <a href="javascript:;">
@@ -55,11 +58,12 @@
                       </a>
                     </li>
                     <li><a href="javascript:;">Help</a></li>
+                    -->
                     <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 
-                <li role="presentation" class="dropdown">
+                <li role="presentation" class="dropdown" style="display: none;">
                   <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                     <i class="fa fa-envelope-o"></i>
                     <span class="badge bg-green">6</span>
