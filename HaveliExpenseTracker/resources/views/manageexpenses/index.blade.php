@@ -80,6 +80,12 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
+                    @if(session('dstatus') && session('dstatus')==1)
+                        <div class="alert alert-success alert-dismissable">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                            <p>Expense Deleted Successfully.</p>
+                        </div>
+                    @endif
                     <table id="datatable-buttons" class="table table-striped table-bordered">
                       <thead>
                         <tr>
@@ -146,7 +152,8 @@
 
                     <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12" id="error_container">
                     @if ($errors->any())
-                        <div class="alert alert-danger">
+                        <div class="alert alert-danger alert-dismissable">
+                          <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
                             <ul>
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>
@@ -155,11 +162,13 @@
                         </div>
                     @endif
                     @if(session('status') && session('status')==1)
-                        <div class="alert alert-success">
+                        <div class="alert alert-success alert-dismissable">
+                          <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
                             <p>Expense Details Added/Updated Succesfully.</p>
                         </div>
                     @elseif(session('status') && session('status')==0)
-                        <div class="alert alert-danger">
+                        <div class="alert alert-danger alert-dismissable">
+                          <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
                             <p>{{ session('exception') }}</p>
                         </div>
                     @endif
@@ -215,6 +224,12 @@
                       </div>
 
                     </form>
+
+                    <form method="POST" action="" id="deleteexpense">
+                      {{ csrf_field() }}
+                      <input type="hidden" name="_method" value="Delete">
+                    </form>
+
                   </div>
                 </div>
               </div>
@@ -295,6 +310,11 @@
   }
   function nkdelete(id){
     console.log(id);
+    $('#error_container').css('display','none');
+    if(confirm('Are you sure? Do you want to delete expense ID='+id)){
+        $('#deleteexpense').attr('action','{{ url('manage-expenses') }}/'+id);
+        $('#deleteexpense').submit();
+    }
   }
   $(document).ready(function(){
       $("#manageexpensesform").submit(function(e){

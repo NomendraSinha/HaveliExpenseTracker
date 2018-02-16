@@ -116,6 +116,7 @@ class HETController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Expense::find($id)->delete();
+        return redirect()->route('manage-expenses.index')->with('dstatus',1);
     }
 }

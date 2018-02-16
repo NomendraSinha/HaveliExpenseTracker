@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Expense;
 
 class HomeController extends Controller
 {
@@ -24,6 +26,8 @@ class HomeController extends Controller
     public function index()
     {
         //return view('home');
+        //return $expcount = Expense::all()->count();
+        //return $userscount = User::all()->count(); 
         return view('myhome');
     }
 }
