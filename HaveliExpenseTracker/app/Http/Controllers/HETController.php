@@ -36,7 +36,24 @@ class HETController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+        $validatedData = $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'date' => 'required',
+            'amount' => 'required|numeric|between:10,99999',
+            'purpose' => 'required|min:7|max:100',
+        ]);
+
+        $status = 1;
+        $exception = '';
+        try{
+            $expenses = new Expense;
+            $expenses->create($request->all());
+        }
+        catch(Exception $e){
+            $status = 0;
+            $exception = $e;
+        }
+        return redirect()->route('manage-expenses.index')->with(['status'=>$status,'exception'=>$exception]);
     }
 
     /**
@@ -70,7 +87,25 @@ class HETController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'id' => 'required|exists:expenses',
+            'date' => 'required',
+            'amount' => 'required|numeric|between:10,99999',
+            'purpose' => 'required|min:7|max:100',
+        ]);
+
+        $status = 1;
+        $exception = '';
+        try{
+            $expenses = Expense::find($id);
+            $expenses->update($request->all());
+        }
+        catch(Exception $e){
+            $status = 0;
+            $exception = $e;
+        }
+        return redirect()->route('manage-expenses.index')->with(['status'=>$status,'exception'=>$exception]);
     }
 
     /**
