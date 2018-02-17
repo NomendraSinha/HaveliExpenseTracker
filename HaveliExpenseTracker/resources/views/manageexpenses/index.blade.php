@@ -292,7 +292,7 @@
 <script type="text/javascript">
     $('#date').daterangepicker({
     	      locale: {
-		        format: 'DD/MM/YYYY'
+		        format: 'DD-MM-YYYY'
 		      },
         	  maxDate: new Date(),
 			  singleDatePicker: true,
