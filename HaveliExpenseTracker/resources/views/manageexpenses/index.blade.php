@@ -106,6 +106,7 @@
                           <td style="max-width: 150px;">{{ $expense['purpose'] }}</td>
                           <td>{{ $expense['amount'] }}</td>
                           <td>
+                          @if($expense->user->id == $currentUser->id)
                             <span onclick="nkedit({{ json_encode($expense) }});" class="fa-stack nk-icon-button" style="margin-right: 15px;">
                               <i class="fa fa-square fa-stack-2x" style="color: #ea900e;"></i>
                               <i class="fa fa-edit fa-stack-1x" style="color: white;"></i>
@@ -114,6 +115,9 @@
                               <i class="fa fa-square fa-stack-2x" style="color: red;"></i>
                               <i class="fa fa-trash fa-stack-1x" style="color: white;"></i>
                             </span>
+                          @else
+                            NA
+                          @endif
                           </td>
                         </tr>
                         @endforeach
