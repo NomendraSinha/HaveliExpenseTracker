@@ -68,14 +68,5 @@ class HomeController extends Controller
                 'expcount_per_diff'=>Helper::get_per_diff($expcount_last,$expcount_this), 
                 'userscount'=>$userscount,
             ]);
-        return $exp_info = DB::table('expenses')
-             ->join('users','expenses.user_id','=','users.id')
-             ->select('user_id', 'users.id', DB::raw('count(*) as total'))
-             ->groupBy('user_id','users.id')
-             ->get();
-        return $exptrashedcount = Expense::onlyTrashed()->get()->count();
-        //return $expcount = Expense::all()->count();
-        //return $userscount = User::all()->count(); 
-        return view('myhome');
     }
 }
