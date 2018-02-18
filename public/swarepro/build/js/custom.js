@@ -2493,6 +2493,7 @@ if (typeof NProgress != 'undefined') {
 				  if ($("#datatable-buttons").length) {
 					$("#datatable-buttons").DataTable({
 					  dom: "Blfrtip",
+					  order: [[ 0, "desc" ]],
 					  buttons: [
 						{
 						  extend: "copy",

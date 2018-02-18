@@ -26,7 +26,7 @@ $factory->define(App\User::class, function (Faker $faker) {
 $factory->define(App\Expense::class, function (Faker $faker) {
     return [
         'user_id' => App\User::all()->random()->id,
-        'date' => $faker->date('Y-m-d','now'),
+        'date' => $faker->date('d-m-','now').rand(2016,2018),
         'amount' => rand(100,10000),
         'purpose' => $faker->text(100),
     ];
