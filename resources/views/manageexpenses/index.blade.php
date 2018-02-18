@@ -188,7 +188,7 @@
 
                       <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 form-group has-feedback">
                         <input type="text" name="id" class="form-control has-feedback-left" id="id" placeholder="ID" readonly="readonly" value="ID">
-                        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                        <span class="fa fa-list form-control-feedback left" aria-hidden="true"></span>
                       </div>
                       <div class="clearfix"></div>
 
