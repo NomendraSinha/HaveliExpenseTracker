@@ -2496,26 +2496,10 @@ if (typeof NProgress != 'undefined') {
 "<'row'<'col-sm-6 col-xs-12'i><'col-sm-6 col-xs-12'p>>",
 					  order: [[ 0, "desc" ]],
 					  buttons: [
-						{
-						  extend: "copy",
-						  className: "btn-sm"
-						},
-						{
-						  extend: "csv",
-						  className: "btn-sm"
-						},
-						{
-						  extend: "excel",
-						  className: "btn-sm"
-						},
-						{
-						  extend: "pdfHtml5",
-						  className: "btn-sm"
-						},
-						{
-						  extend: "print",
-						  className: "btn-sm"
-						},
+						{extend:"copyHtml5",className:"btn-sm"},
+						{extend:"excelHtml5",className:"btn-sm"},
+						{extend:"pdfHtml5",className:"btn-sm"},
+						{extend:"print",className:"btn-sm"},
 					  ],
 					  responsive: true
 					});
