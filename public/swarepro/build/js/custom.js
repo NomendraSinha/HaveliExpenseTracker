@@ -2492,7 +2492,8 @@ if (typeof NProgress != 'undefined') {
 				var handleDataTableButtons = function() {
 				  if ($("#datatable-buttons").length) {
 					$("#datatable-buttons").DataTable({
-					  dom: "Blfrtip",
+					  dom: "<'row'<'col-sm-4 col-xs-12'l><'col-sm-4 col-xs-12'B><'col-sm-4 col-xs-12'f>>rt" +
+"<'row'<'col-sm-6 col-xs-12'i><'col-sm-6 col-xs-12'p>>",
 					  order: [[ 0, "desc" ]],
 					  buttons: [
 						{
@@ -5043,5 +5044,3 @@ if (typeof NProgress != 'undefined') {
 		init_autocomplete();
 				
 	});	
-	
-

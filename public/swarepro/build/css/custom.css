@@ -1342,6 +1342,7 @@ table.jambo_table tbody tr.selected td {
     font-size: 14px;
     background-color: white
 }
+/*
 .dataTables_length {
     width: 40%;
     float: left
@@ -1359,6 +1360,7 @@ table.jambo_table tbody tr.selected td {
     float: right;
     text-align: right
 }
+*/
 table.dataTable th.focus,
 table.dataTable td.focus {
     outline: 2px solid #1ABB9C !important;
@@ -4253,3 +4255,7 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
     background-color: #ffff !important;
 }
 /** /bootstrap-datetimepicker **/
+
+.nk-middle{
+    vertical-align: middle;
+}
