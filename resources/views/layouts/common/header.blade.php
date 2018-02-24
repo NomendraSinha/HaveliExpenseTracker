@@ -30,7 +30,7 @@
     <link href="{{ asset('swarepro/vendors/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet">
 
     <!-- Custom Theme Style -->
-    <link href="{{ asset('swarepro/build/css/custom.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('swarepro/build/css/custom.min.css').env('CUSTOM_CSS', '') }}" rel="stylesheet">
 
     @yield('header-style')
     @yield('header-script')

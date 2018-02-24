@@ -47,7 +47,7 @@
     <script src="{{ asset('swarepro/vendors/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
 
     <!-- Custom Theme Scripts -->
-    <script src="{{ asset('swarepro/build/js/custom.min.js?version=1.0.0') }}"></script>
+    <script src="{{ asset('swarepro/build/js/custom.min.js').env('CUSTOM_JS', '') }}"></script>
 
     @yield('footer-style')
     @yield('footer-script')

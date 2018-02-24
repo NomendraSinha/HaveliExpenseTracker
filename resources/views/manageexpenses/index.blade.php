@@ -35,7 +35,7 @@
         <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
-              <div class="title_left">
+              <div class="title_left" style="width: 100%;">
                 <h3>Manage Expenses</h3>
               </div>
 
