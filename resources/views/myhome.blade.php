@@ -37,7 +37,7 @@
           </form>
           <!-- top tiles -->
           <div class="text-center" style="margin-top: 50px;">
-            <h3>Statistics <small>(Current Month)</small></h3>
+            <h3>Statistics</h3>
           </div>
           <hr>
           <div class="row tile_count" style="margin-top: 25px; margin-bottom: 25px; ">
@@ -88,7 +88,7 @@
           </div>
           <!-- /top tiles -->
           <div class="text-center" style="margin-top: 25px;">
-            <h3>Individual User Expense <small>(Current Month)</small></h3>
+            <h3>Individual User Expense</h3>
           </div>
           <hr>
           <!-- top tiles -->

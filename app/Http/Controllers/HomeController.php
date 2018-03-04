@@ -77,11 +77,14 @@ class HomeController extends Controller
             $monthint = '0'.$monthint;
         }
         $today = Carbon::createFromFormat('Y-m', Carbon::now()->format('Y').'-'.$monthint);
+        $today2 = Carbon::createFromFormat('Y-m', Carbon::now()->format('Y').'-'.$monthint);
         $thismonth = $today->format('Y-m').'-01';
         $lastmonth = $today->subMonth()->format('Y-m').'-01';
+        $nextmonth = $today2->addMonth()->format('Y-m').'-01';
         $exp_thismonth = DB::table('expenses')
              ->join('users','expenses.user_id','=','users.id')
              ->where('date','>=',$thismonth)
+             ->where('date','<',$nextmonth)
              ->select('user_id', 'users.name', DB::raw('count(*) as count'), DB::raw('sum(amount) as sum'))
              ->groupBy('user_id','users.name')
              ->get();
@@ -92,11 +95,11 @@ class HomeController extends Controller
              ->select('user_id', 'users.name', DB::raw('count(*) as count'), DB::raw('sum(amount) as sum'))
              ->groupBy('user_id','users.name')
              ->get();
-        $exp_total_thismonth = Expense::where('date','>=',$thismonth)->sum('amount');
+        $exp_total_thismonth = Expense::where('date','>=',$thismonth)->where('date','<',$nextmonth)->sum('amount');
         $exp_total_lastmonth = Expense::where('date','>=',$lastmonth)
              ->where('date','<',$thismonth)->sum('amount');
-        $exptrashedcount_this = Expense::where('date','>=',$thismonth)->onlyTrashed()->get()->count();
-        $expcount_this = Expense::where('date','>=',$thismonth)->count();
+        $exptrashedcount_this = Expense::where('date','>=',$thismonth)->where('date','<',$nextmonth)->onlyTrashed()->get()->count();
+        $expcount_this = Expense::where('date','>=',$thismonth)->where('date','<',$nextmonth)->count();
         $userscount = User::all()->count();
         $exptrashedcount_last = Expense::where('date','>=',$lastmonth)
              ->where('date','<',$thismonth)->onlyTrashed()->get()->count();
