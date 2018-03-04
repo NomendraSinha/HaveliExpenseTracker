@@ -17,8 +17,26 @@
         ?>
         <!-- page content -->
         <div class="right_col" role="main">
+          <form method="POST" action="{{ route('myhomefiltered') }}" id="monthfilterform">
+            {{ csrf_field() }}
+            <div class="form-group col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-12 text-center">
+              <label for="monthfilter">Select Month</label>
+              <?php 
+              $currentMonth = intval(date('m'));
+              ?>
+              <select class="form-control" id="monthfilter" name="monthfilter">
+                @for($i=$currentMonth; $i>0; $i--)
+                <?php
+                  $dateObj   = DateTime::createFromFormat('!m', $i);
+                  $monthName = $dateObj->format('M'); // March
+                ?>
+                  <option value="{{ $i }}" <?php if(isset($monthfilterval) && $monthfilterval==$i){ echo "selected";} ?> >{{ $monthName.date(" - Y") }}</option>
+                @endfor
+              </select>
+            </div>
+          </form>
           <!-- top tiles -->
-          <div class="text-center" style="margin-top: 75px;">
+          <div class="text-center" style="margin-top: 50px;">
             <h3>Statistics <small>(Current Month)</small></h3>
           </div>
           <hr>
@@ -85,4 +103,13 @@
           <!-- /top tiles -->
         </div>
         <!-- /page content -->
+@endsection
+@section('footer-script')
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#monthfilter').on('change',function(){
+      $('#monthfilterform').submit();
+    });
+  });
+</script>
 @endsection
